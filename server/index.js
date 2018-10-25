@@ -5,6 +5,7 @@ let port = 3000
 let bp = require("body-parser")
 let cors = require("cors")
 
+
 //configure cors
 var whitelist = ["http://localhost:8080"]
 var corsOptions = {
@@ -16,19 +17,22 @@ var corsOptions = {
 }
 server.use(cors(corsOptions))
 
+//connect to database
+require("./db/db-config")
+
 //configure middleware
 server.use(bp.json())
 server.use(bp.urlencoded({
   extended: true
 }))
 
-//connect to database
-require("./db/db-config")
+server.use(express.static(__dirname + '/../www/'))
+
 
 //register auth routes - must register these before gatekeeper!
 let auth = require("./auth/routes")
 server.use(auth.session)
-server.use(auth.routes)
+server.use(auth.router)
 
 //gatekeeper
 server.use((req, res, next) => {
