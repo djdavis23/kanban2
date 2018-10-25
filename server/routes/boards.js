@@ -30,7 +30,7 @@ router.put('/:id', (req, res, next) => {
       }
       board.update(req.body, (err) => {
         if (err) {
-          next()
+          next(err)
           return
         }
         res.send("Board Updated")
@@ -48,7 +48,7 @@ router.delete('/:id', (req, res, next) => {
       }
       board.remove(err => {
         if (err) {
-          next()
+          next(err)
           return
         }
         return res.send("Board Deleted")

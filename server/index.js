@@ -46,12 +46,14 @@ server.use((req, res, next) => {
 
 //register api routes
 let boardRoutes = require('./routes/boards')
+let listRoutes = require('./routes/lists')
 
 server.use('/api/boards', boardRoutes)
+server.use('/api/lists', listRoutes)
 
 //catch all
 server.use('/api/*', (error, req, res, next) => {
-  res.send({ error: error ? error.message : "Server Error" })
+  res.status(400).send({ error: error ? error.message : "Bad Request" })
 })
 
 server.use("*", (req, res, next) => {
