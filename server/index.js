@@ -25,10 +25,33 @@ server.use(bp.urlencoded({
 //connect to database
 require("./db/db-config")
 
+//register auth routes - must register these before gatekeeper!
+let auth = require("./auth/routes")
+server.use(auth.session)
+server.use(auth.routes)
+
+//gatekeeper
+server.use((req, res, next) => {
+  if (!req.session.uid) {
+    return res.status(401).send({
+      error: "Please login to continue"
+    })
+  }
+  next()
+})
+
+//register api routes
+let boardRoutes = require('./routes/boards')
+
+server.use('/api/boards', boardRoutes)
 
 //catch all
-server.get("*", (req, res, next) => {
-  res.status(400).send({
+server.use('/api/*', (error, req, res, next) => {
+  res.send({ error: error ? error.message : "Server Error" })
+})
+
+server.use("*", (req, res, next) => {
+  res.status(404).send({
     error: "Resource not found"
   })
 })
