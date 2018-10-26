@@ -47,9 +47,11 @@ server.use((req, res, next) => {
 //register api routes
 let boardRoutes = require('./routes/boards')
 let listRoutes = require('./routes/lists')
+let taskRoutes = require('./routes/tasks')
 
 server.use('/api/boards', boardRoutes)
 server.use('/api/lists', listRoutes)
+server.use('/api/tasks', taskRoutes)
 
 //catch all
 server.use('/api/*', (error, req, res, next) => {
