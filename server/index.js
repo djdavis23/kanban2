@@ -26,6 +26,7 @@ server.use(bp.urlencoded({
   extended: true
 }))
 
+//designate files for public viewing
 server.use(express.static(__dirname + '/../www/'))
 
 
