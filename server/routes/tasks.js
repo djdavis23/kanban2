@@ -20,10 +20,16 @@ router.post('/', (req, res, next) => {
 router.put('/:id', (req, res, next) => {
   Tasks.findById(req.params.id)
     .then(task => {
-      if (!task._id.equals(req.session.uid)) {
+      if (!task.userId.equals(req.session.uid)) {
         return res.status(401).send("Not authorized to edit another user's task")
       }
-      return res.send(task)
+      task.update(req.body, (err) => {
+        if (err) {
+          next(err)
+          return
+        }
+        return res.send("Task updated")
+      })
     })
     .catch(next)
 })
@@ -32,7 +38,7 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   Tasks.findById(req.params.id)
     .then(task => {
-      if (!task._id.equals(req.session.uid)) {
+      if (!task.userId.equals(req.session.uid)) {
         return res.status(401).send("Not authorized to delete another user's task")
       }
       task.remove(err => {
@@ -51,8 +57,6 @@ router.delete('/by-list/:id', (req, res, next) => {
     .then(() => res.send("Tasks deleted"))
     .catch(next)
 })
-
-
 
 
 module.exports = router;

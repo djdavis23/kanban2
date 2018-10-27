@@ -11,7 +11,8 @@ let schema = new Schema({
   listId: { type: ObjectId, reference: 'List', required: true },
   boardId: { type: ObjectId, reference: 'Board', required: true },
   userId: { type: ObjectId, reference: 'User', required: true },
-  status: { type: String, required: true, default: "To-Do" }
+  status: { type: String, required: true, default: "To-Do" },
+  created: { type: String, required: true, default: Date.now() }
 })
 
 
