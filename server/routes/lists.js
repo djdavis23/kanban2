@@ -48,7 +48,7 @@ router.delete('/:id', (req, res, next) => {
         if (err) {
           return res.send(err)
         }
-        return res.status(204)
+        return res.status(204).send()
       })
     })
     .catch(next)
@@ -57,7 +57,7 @@ router.delete('/:id', (req, res, next) => {
 //delete all lists by board-id
 router.delete('/by-board/:id', (req, res, next) => {
   Lists.deleteMany({ boardId: req.params.id })
-    .then(() => res.status(204))
+    .then(() => res.status(204).send())
     .catch(next)
 })
 

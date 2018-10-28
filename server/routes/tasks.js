@@ -45,7 +45,7 @@ router.delete('/:id', (req, res, next) => {
         if (err) {
           return res.send(err)
         }
-        return res.status(204)
+        return res.status(204).send()
       })
     })
     .catch(next)
@@ -54,7 +54,7 @@ router.delete('/:id', (req, res, next) => {
 //delete all tasks beloning to a list
 router.delete('/by-list/:id', (req, res, next) => {
   Tasks.deleteMany({ listId: req.params.id })
-    .then(() => res.status(204))
+    .then(() => res.status(204).send())
     .catch(next)
 })
 

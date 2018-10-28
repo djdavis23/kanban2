@@ -44,7 +44,7 @@ router.delete('/:id', (req, res, next) => {
         if (err) {
           return res.send(err)
         }
-        return res.status(204)
+        return res.status(204).send()
       })
     })
     .catch(next)
@@ -53,7 +53,7 @@ router.delete('/:id', (req, res, next) => {
 //delete comments by task id
 router.delete('/by-task/:id', (req, res, next) => {
   Comments.deleteMany({ taskId: req.params.id })
-    .then(() => res.status(204))
+    .then(() => res.status(204).send())
     .catch(next)
 })
 
