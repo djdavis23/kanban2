@@ -75,7 +75,7 @@ router.delete('/auth/logout', (req, res) => {
     if (err) {
       return res.send(err)
     }
-    return res.status(204).send({ message: "Logout successful" })
+    return res.status(200).send({ message: "Logout successful" })
   })
 })
 

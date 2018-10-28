@@ -51,7 +51,7 @@ router.delete('/:id', (req, res, next) => {
           next(err)
           return
         }
-        return res.status(204).send("Board Deleted")
+        return res.status(204)
       })
     })
     .catch(next)
