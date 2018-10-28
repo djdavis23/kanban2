@@ -4,7 +4,7 @@ let Tasks = require('../models/Task')
 //get tasks by list id
 router.get('/by-list/:id', (req, res, next) => {
   Tasks.find({ listId: req.params.id })
-    .then(tasks => res.send(tasks))
+    .then(tasks => res.status(200).send(tasks))
     .catch(next)
 })
 
@@ -12,7 +12,7 @@ router.get('/by-list/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   req.body.userId = req.session.uid
   Tasks.create(req.body)
-    .then(task => res.send(task))
+    .then(task => res.status(201).send(task))
     .catch(next)
 })
 
@@ -21,14 +21,14 @@ router.put('/:id', (req, res, next) => {
   Tasks.findById(req.params.id)
     .then(task => {
       if (!task.userId.equals(req.session.uid)) {
-        return res.status(401).send("Not authorized to edit another user's task")
+        return res.status(403).send("Not authorized to edit another user's task")
       }
       task.update(req.body, (err) => {
         if (err) {
           next(err)
           return
         }
-        return res.send("Task updated")
+        return res.status(200).send("Task updated")
       })
     })
     .catch(next)
@@ -39,13 +39,13 @@ router.delete('/:id', (req, res, next) => {
   Tasks.findById(req.params.id)
     .then(task => {
       if (!task.userId.equals(req.session.uid)) {
-        return res.status(401).send("Not authorized to delete another user's task")
+        return res.status(403).send("Not authorized to delete another user's task")
       }
       task.remove(err => {
         if (err) {
           return res.send(err)
         }
-        return res.send("Task Deleted")
+        return res.status(204).send("Task Deleted")
       })
     })
     .catch(next)
@@ -54,7 +54,7 @@ router.delete('/:id', (req, res, next) => {
 //delete all tasks beloning to a list
 router.delete('/by-list/:id', (req, res, next) => {
   Tasks.deleteMany({ listId: req.params.id })
-    .then(() => res.send("Tasks deleted"))
+    .then(() => res.status(204).send("Tasks deleted"))
     .catch(next)
 })
 

@@ -5,7 +5,7 @@ let Boards = require("../models/Board")
 router.get("/", (req, res, next) => {
   Boards.find({ author: req.session.uid })
     .then(boards => {
-      return res.send(boards)
+      return res.status(200).send(boards)
     })
     .catch(next)
 })
@@ -15,7 +15,7 @@ router.post('/', (req, res, next) => {
   req.body.author = req.session.uid
   Boards.create(req.body)
     .then(board => {
-      return res.send(board)
+      return res.status(201).send(board)
     })
     .catch(next)
 })
@@ -26,14 +26,14 @@ router.put('/:id', (req, res, next) => {
   Boards.findById(req.params.id)
     .then(board => {
       if (!board.author.equals(req.session.uid)) {
-        return res.status(401).send("Not authorized to update another user's board")
+        return res.status(403).send("Not authorized to update another user's board")
       }
       board.update(req.body, (err) => {
         if (err) {
           next(err)
           return
         }
-        res.send("Board Updated")
+        res.status(200).send("Board Updated")
       })
     })
     .catch(next)
@@ -44,14 +44,14 @@ router.delete('/:id', (req, res, next) => {
   Boards.findById(req.params.id)
     .then(board => {
       if (!board.author.equals(req.session.uid)) {
-        return res.status(401).send("Not authorized to delete another user's board")
+        return res.status(403).send("Not authorized to delete another user's board")
       }
       board.remove(err => {
         if (err) {
           next(err)
           return
         }
-        return res.send("Board Deleted")
+        return res.status(204).send("Board Deleted")
       })
     })
     .catch(next)

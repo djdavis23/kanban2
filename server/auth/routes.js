@@ -24,7 +24,7 @@ router.post('/auth/register', (req, res) => {
       //set session user id
       req.session.uid = user._id
       //return user object to the client
-      return res.send(user)
+      return res.status(201).send(user)
     })
     .catch(err => {
       res.status(400).send(err.message)
@@ -38,7 +38,7 @@ router.post('/auth/login', (req, res) => {
   })
     .then(user => {
       if (!user) {
-        return res.status(401).send(loginError)
+        return res.status(400).send(loginError)
       }
       else if (!user.validatePassword(req.body.password)) {
         return res.status(401).send(loginError)
@@ -46,11 +46,11 @@ router.post('/auth/login', (req, res) => {
       else {
         delete user._doc.password
         req.session.uid = user._id
-        res.send(user)
+        res.status(201).send(user)
       }
     })
     .catch(err => {
-      res.status(500).send(err)
+      res.status(400).send(err)
     })
 })
 
@@ -59,13 +59,13 @@ router.get('/auth/authenticate', (req, res) => {
   User.findById(req.session.uid)
     .then(user => {
       if (!user) {
-        return res.status(401).send({ error: "Please login to continue" })
+        return res.status(400).send({ error: "Please login to continue" })
       }
       delete user._doc.password
-      res.send(user)
+      res.status(200).send(user)
     })
     .catch(err => {
-      res.status(500).send(err)
+      res.status(400).send(err)
     })
 })
 
@@ -75,7 +75,7 @@ router.delete('/auth/logout', (req, res) => {
     if (err) {
       return res.send(err)
     }
-    return res.send({ message: "Logout successful" })
+    return res.status(204).send({ message: "Logout successful" })
   })
 })
 
