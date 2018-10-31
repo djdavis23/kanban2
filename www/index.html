@@ -13,12 +13,37 @@
   <title>Kanban2</title>
 </head>
 
-<body class="container-fluid">
-  <div class="row">
-    <div class="col-4 offset-4">
-      <h1>Kanban2 ready to go!</h1>
+<body>
+  <header class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <h1>Kanban2</h1>
+        <button onClick="app.controllers.user.showLogin()">Login</button>
+        <button onClick="app.controllers.user.showRegister()">Register</button>
+      </div>
+      <div id="user-form" class="col-9">
+        <form onSubmit="register(event)">
+          <form-group class="row">
+            <div class="col">
+              <input type="text" class="form-control" name="userName" placeholder="User Name" required>
+            </div>
+            <div class="col">
+              <input type="email" class="form-control" name="email" placeholder="Email" required>
+            </div>
+            <div class="col">
+              <input type="password" class="form-control" name="password" placeholder="Enter password" required>
+            </div>
+            <div class="col">
+              <input type="password" class="form-control" name="password2" placeholder="Confirm password" required>
+            </div>
+            <div class="col-2">
+              <button type="submit">Submit</button>
+            </div>
+          </form-group>
+        </form>
+      </div>
     </div>
-  </div>
+  </header>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
   <script src="app/main.js" type="module"></script>
