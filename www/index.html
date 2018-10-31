@@ -14,33 +14,17 @@
 </head>
 
 <body>
-  <header class="container-fluid">
+  <header class="container-fluid bg-primary">
     <div class="row">
-      <div class="col-3">
-        <h1>Kanban2</h1>
-        <button onClick="app.controllers.user.showLogin()">Login</button>
-        <button onClick="app.controllers.user.showRegister()">Register</button>
+      <div class="col-3 mb-2">
+        <h1 class="text-white">Kanban2</h1>
+        <div id="user-buttons">
+          <!-- user buttons go here -->
+        </div>
+
       </div>
       <div id="user-form" class="col-9">
-        <form onSubmit="register(event)">
-          <form-group class="row">
-            <div class="col">
-              <input type="text" class="form-control" name="userName" placeholder="User Name" required>
-            </div>
-            <div class="col">
-              <input type="email" class="form-control" name="email" placeholder="Email" required>
-            </div>
-            <div class="col">
-              <input type="password" class="form-control" name="password" placeholder="Enter password" required>
-            </div>
-            <div class="col">
-              <input type="password" class="form-control" name="password2" placeholder="Confirm password" required>
-            </div>
-            <div class="col-2">
-              <button type="submit">Submit</button>
-            </div>
-          </form-group>
-        </form>
+        <!-- login/register forms go here -->
       </div>
     </div>
   </header>
