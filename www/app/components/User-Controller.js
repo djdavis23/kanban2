@@ -100,7 +100,7 @@ export default class UserController {
     drawUserButtons()
     drawUserForm()
     console.log(e.target.email.value, e.target.password.value)
-    e.reset()//what is the correct command
+    e.target.reset()//what is the correct command
   }
 
   login(e) {
@@ -109,7 +109,7 @@ export default class UserController {
     console.log(e.target.email.value, e.target.password.value)
     drawUserButtons()
     drawUserForm()
-    e.reset()//what is the correct command
+    e.target.reset()//what is the correct command
   }
 
   logout() {
@@ -117,5 +117,6 @@ export default class UserController {
     newUser = null;
     drawUserButtons()
     drawUserForm()
+    console.log("logging out")
   }
 }
