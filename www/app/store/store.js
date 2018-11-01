@@ -66,6 +66,20 @@ export default class Store {
       .catch(err => console.log(err))
   }
 
+  authenticate(setUserStatus, drawButtons, drawForm) {
+    auth.get('/authenticate')
+      .then(res => {
+        setState('user', res.data)
+        setUserStatus(true)
+        drawButtons()
+        drawForm()
+      })
+      .catch(err => {
+        console.log(err)
+        drawButtons()
+      })
+  }
+
   logout(setUserStatus, drawButtons, drawForm) {
     auth.delete('/logout')
       .then(res => {

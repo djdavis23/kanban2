@@ -27,14 +27,16 @@ function drawUserButtons() {
 
 function drawUserForm() {
   let template
-  if (newUser == null) {
-    template = ""
-  }
-  else if (loggedIn) {
+
+  if (loggedIn) {
     template = `
       <h2 class="text-white">Welcome ${store.state.user.userName}!</h2>
     `
   }
+  else if (newUser == null) {
+    template = ""
+  }
+
   else if (newUser) {
     template = `
     <form onSubmit="app.controllers.user.register(event)" class="mt-4">
@@ -85,7 +87,7 @@ function setUserStatus(status) {
 export default class UserController {
 
   constructor() {
-    drawUserButtons()
+    store.authenticate(setUserStatus, drawUserButtons, drawUserForm)
   }
 
   showLogin() {
