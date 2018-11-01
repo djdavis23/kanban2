@@ -23,7 +23,7 @@ let api = axios.create({
 
 //private function to set state properties
 function setState(prop, data) {
-  state.prop = data;
+  state[prop] = data;
   console.log(state);
 }
 
@@ -39,5 +39,41 @@ export default class Store {
   //return a copy of the state object
   get state() {
     return { ...state }
+  }
+
+  //USER METHODS
+
+  //register new user
+  register(creds, setUserStatus, drawButtons, drawForm) {
+    auth.post('/register', creds)
+      .then(res => {
+        setState('user', res.data)
+        setUserStatus(true)
+        drawButtons()
+        drawForm()
+      })
+      .catch(err => console.log(err))
+  }
+
+  login(creds, setUserStatus, drawButtons, drawForm) {
+    auth.post('/login', creds)
+      .then(res => {
+        setState('user', res.data)
+        setUserStatus(true)
+        drawButtons()
+        drawForm()
+      })
+      .catch(err => console.log(err))
+  }
+
+  logout(setUserStatus, drawButtons, drawForm) {
+    auth.delete('/logout')
+      .then(res => {
+        setState('user', {})
+        setUserStatus(false)
+        drawButtons()
+        drawForm()
+      })
+      .catch(err => console.log(err))
   }
 }

@@ -32,7 +32,7 @@ function drawUserForm() {
   }
   else if (loggedIn) {
     template = `
-      <h2 class="text-white">Welcome User!</h2>
+      <h2 class="text-white">Welcome ${store.state.user.userName}!</h2>
     `
   }
   else if (newUser) {
@@ -78,6 +78,10 @@ function drawUserForm() {
   userForm.innerHTML = template
 }
 
+function setUserStatus(status) {
+  loggedIn = status
+}
+
 export default class UserController {
 
   constructor() {
@@ -96,27 +100,31 @@ export default class UserController {
 
   register(e) {
     e.preventDefault()
-    loggedIn = true//only if register is successful
-    drawUserButtons()
-    drawUserForm()
-    console.log(e.target.email.value, e.target.password.value)
-    e.target.reset()//what is the correct command
+    if (e.target.password.value != e.target.password2.value) {
+      alert("Password entries do not match")
+      return;
+    }
+    store.register({
+      userName: e.target.userName.value,
+      email: e.target.email.value,
+      password: e.target.password.value
+    }, setUserStatus, drawUserButtons, drawUserForm)
+    // e.target.reset()
   }
 
   login(e) {
     e.preventDefault()
-    loggedIn = true//only do this if login successful
-    console.log(e.target.email.value, e.target.password.value)
-    drawUserButtons()
-    drawUserForm()
-    e.target.reset()//what is the correct command
+    store.login({
+      email: e.target.email.value,
+      password: e.target.password.value
+    }, setUserStatus, drawUserButtons, drawUserForm)
+    //console.log(e.target.email.value, e.target.password.value)
+
   }
 
   logout() {
-    loggedIn = false;
+    store.logout(setUserStatus, drawUserButtons, drawUserForm);
     newUser = null;
-    drawUserButtons()
-    drawUserForm()
     console.log("logging out")
   }
 }
