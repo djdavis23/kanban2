@@ -30,7 +30,15 @@ function drawUserForm() {
 
   if (loggedIn) {
     template = `
-      <h2 class="text-white">Welcome ${store.state.user.userName}!</h2>
+     <div class="row">
+      <div class="col-9">
+        <h2 class="text-white mt-3">Welcome ${store.state.user.userName}!</h2>
+      </div>
+      <div class="col-3">
+        <button class="mt-4">Retrieve Boards</button>
+        <button class="mt-4">Create Board</button>
+      </div>
+     </div>
     `
   }
   else if (newUser == null) {
