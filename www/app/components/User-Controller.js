@@ -12,13 +12,13 @@ function drawUserButtons() {
 
   if (!loggedIn) {
     template = `
-      <button onClick="app.controllers.user.showLogin()">Login</button>
-      <button onClick="app.controllers.user.showRegister()">Register</button>
+      <button onClick="app.controllers.user.showLogin()" class="btn btn-secondary">Login</button>
+      <button onClick="app.controllers.user.showRegister()" class="btn btn-secondary">Register</button>
   `
   }
   else {
     template = `
-     <button onClick="app.controllers.user.logout()">Logout</button>
+     <button onClick="app.controllers.user.logout()" class="btn btn-danger">Logout</button>
     `
   }
   userButtons.innerHTML = template
@@ -31,12 +31,12 @@ function drawUserForm() {
   if (loggedIn) {
     template = `
      <div class="row">
-      <div class="col-9">
-        <h2 class="text-white mt-3">Welcome ${store.state.user.userName}!</h2>
+      <div class="col-8">
       </div>
-      <div class="col-3">
-        <button class="mt-4">Retrieve Boards</button>
-        <button class="mt-4">Create Board</button>
+      <div class="col-4">
+        <h3 class="text-white mt-2">Welcome ${store.state.user.userName}!</h3>
+        <button onClick="app.controllers.board.getBoards()" class="btn btn-secondary mt-1">Retrieve Boards</button>
+        <button class="btn btn-secondary mt-1">Create Board</button>
       </div>
      </div>
     `
