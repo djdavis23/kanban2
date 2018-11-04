@@ -8,8 +8,14 @@ function drawBoards() {
   let template = ""
 
   store.state.boards.forEach(board => {
-    template += `
-      <h2>${board.title}</h2>
+    template += `      
+      <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Created: ${board.created}</div>
+        <div class="card-body">
+          <h4 class="card-title">${board.title}</h4>
+          <p class="card-text">${board.description}</p>
+        </div>
+      </div>
     `
   })
 
