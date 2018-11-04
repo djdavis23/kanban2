@@ -6,7 +6,8 @@ let store;
 
 //program state data
 let state = {
-  user: {}
+  user: {},
+  boards: []
 }
 
 //routers
@@ -89,5 +90,15 @@ export default class Store {
         drawForm()
       })
       .catch(err => console.log(err))
+  }
+
+  //board methods
+  getBoards(drawBoards) {
+    api.get('/boards')
+      .then(res => {
+        setState('boards', res.data)
+        drawBoards()
+      })
+      .catch(err => console.error(err))
   }
 }
