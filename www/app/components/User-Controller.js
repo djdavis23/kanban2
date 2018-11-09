@@ -11,12 +11,14 @@ function drawUserButtons() {
   let template
 
   if (!loggedIn) {
+    //Draw User login and register buttons
     template = `
       <button onClick="app.controllers.user.showLogin()" class="btn btn-secondary">Login</button>
       <button onClick="app.controllers.user.showRegister()" class="btn btn-secondary">Register</button>
   `
   }
   else {
+    //draw logout button
     template = `
      <button onClick="app.controllers.user.logout()" class="btn btn-danger">Logout</button>
     `
@@ -29,23 +31,25 @@ function drawUserForm() {
   let template
 
   if (loggedIn) {
+    //draw board buttons
     template = `
      <div class="row">
-      <div class="col-8">
-      </div>
+      <div class="col-8"></div>
       <div class="col-4">
         <h3 class="text-white mt-2">Welcome ${store.state.user.userName}!</h3>
         <button onClick="app.controllers.board.getBoards()" class="btn btn-secondary mt-1">Retrieve Boards</button>
-        <button class="btn btn-secondary mt-1">Create Board</button>
+        <button class="btn btn-secondary mt-1" type="button" data-toggle="modal" data-target="#newBoardModal">Create Board</button>
       </div>
      </div>
     `
   }
   else if (newUser == null) {
+    //leave blank if no action selected
     template = ""
   }
 
   else if (newUser) {
+    //draw register form for a new user
     template = `
     <form onSubmit="app.controllers.user.register(event)" class="mt-4">
       <form-group class="row">
@@ -69,6 +73,7 @@ function drawUserForm() {
     `
   }
   else {
+    //draw login form for a new user
     template = `
     <form onSubmit="app.controllers.user.login(event)" class="mt-4">
       <form-group class="row">    

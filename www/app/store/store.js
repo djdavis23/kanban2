@@ -12,12 +12,12 @@ let state = {
 
 //routers
 //@ts-ignore
-let auth = axios.create({
+const auth = axios.create({
   baseURL: "//localhost:3000/auth",
   timeout: 3000
 })
 //@ts-ignore
-let api = axios.create({
+const api = axios.create({
   baseURL: "//localhost:3000/api",
   timeout: 3000
 })
@@ -100,5 +100,9 @@ export default class Store {
         drawBoards()
       })
       .catch(err => console.error(err))
+  }
+
+  createBoard(newBoard, drawBoards) {
+    api.post('/boards', newBoard)
   }
 }

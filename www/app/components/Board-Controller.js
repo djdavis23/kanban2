@@ -39,7 +39,13 @@ export default class BoardController {
   }
 
   createBoard(e) {
-
+    e.preventDefault()
+    let newBoard = {
+      title: e.target.title.value,
+      description: e.target.description.value
+    }
+    store.createBoard(newBoard, drawBoards);
+    e.target.reset()
   }
 
   showBoardDetails(boardId) {
