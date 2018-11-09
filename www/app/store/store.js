@@ -22,11 +22,12 @@ const api = axios.create({
   timeout: 3000
 })
 
-//private function to set state properties
+//private functions to set state properties
 function setState(prop, data) {
   state[prop] = data;
   console.log(state);
 }
+
 
 export default class Store {
   //singleton constructor
@@ -104,5 +105,7 @@ export default class Store {
 
   createBoard(newBoard, drawBoards) {
     api.post('/boards', newBoard)
+      .then(res => this.getBoards(drawBoards))
+      .catch(err => console.error(err))
   }
 }
