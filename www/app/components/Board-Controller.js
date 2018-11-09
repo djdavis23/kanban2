@@ -13,9 +13,10 @@ function drawBoards() {
         <div class="card-header bg-secondary text-white flexbox">
           <div>Created: ${new Date(board.created).toDateString()}</div>
           <div><i class="fa fa-arrows-alt clickable" aria-hidden="true" 
-          onClick="app.controllers.board.showBoardDetails(board._id)"></i>&nbsp&nbsp
-          <i class="fa fa-trash clickable" aria-hidden="true"
-          onClick="app.controllers.board.deleteBoard(board._id)"></i>
+          onclick="app.controllers.board.showBoardDetails(board._id)"></i>&nbsp&nbsp
+          <span class="clickable" onclick="app.controllers.board.deleteBoard(board._id)">
+          <i class="fa fa-trash clickable" aria-hidden="true"></i>          
+          </span>
           </div>
         </div>
         <div class="card-body bg-light text-secondary">
@@ -40,7 +41,7 @@ export default class BoardController {
 
   }
 
-  showBoardDetails() {
+  showBoardDetails(boardId) {
     console.log("Retrieving board details")
   }
 
