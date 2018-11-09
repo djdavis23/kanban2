@@ -54,6 +54,7 @@ export default class BoardController {
 
   deleteBoard(boardId) {
     console.log("Deleting Board")
+    store.deleteBoard(boardId, drawBoards)
   }
 
 

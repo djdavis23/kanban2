@@ -108,4 +108,10 @@ export default class Store {
       .then(res => this.getBoards(drawBoards))
       .catch(err => console.error(err))
   }
+
+  deleteBoard(boardId, drawBoards) {
+    api.delete(`/boards/${boardId}`)
+      .then(res => this.getBoards(drawBoards))
+      .catch(err => console.error(err))
+  }
 }
