@@ -140,6 +140,9 @@ export default class UserController {
   logout() {
     store.logout(setUserStatus, drawUserButtons, drawUserForm);
     newUser = null;
+    document.getElementById('main-content').innerHTML = ""
+    document.getElementById('detail-pane').innerHTML = ""
+
     console.log("logging out")
   }
 }
