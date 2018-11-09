@@ -8,7 +8,8 @@ function drawBoards() {
   let template = ""
 
   store.state.boards.forEach(board => {
-    template += `      
+    template += ` 
+    <div class="col-4">    
       <div class="card mb-3" style="max-width: 20rem;">
         <div class="card-header bg-secondary text-white flexbox">
           <div>Created: ${new Date(board.created).toDateString()}</div>
@@ -18,11 +19,12 @@ function drawBoards() {
             <i class="fa fa-trash clickable" onclick="app.controllers.board.deleteBoard('${board._id}')" aria-hidden="true"></i>
           </div>
         </div>
-        <div class="card-body bg-light text-secondary">
+        <div class="card-body bg-light text-primary">
           <h4 class="card-title">${board.title}</h4>
           <p class="card-text">${board.description}</p>
         </div>
       </div>
+    </div>     
     `
   })
 
