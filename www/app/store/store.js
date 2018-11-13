@@ -135,8 +135,8 @@ export default class Store {
         res.data.forEach(list => {
           this.getTasksByList(list._id)
         })
-        drawLists()
       })
+      .then(() => drawLists())
       .catch(err => console.error(err))
   }
 
