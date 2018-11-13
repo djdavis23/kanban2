@@ -3,6 +3,7 @@ import Store from "../store/store.js"
 let store = new Store()
 
 const contentPane = document.getElementById("main-content")
+const boardHeader = document.getElementById("header-right")
 
 function drawBoards() {
   let template = ""
@@ -33,6 +34,19 @@ function drawBoards() {
 
 function drawActiveBoard() {
   console.log("drawing active board")
+  let template = `
+   <div class="row">
+    <div class="col-8 text-white">
+      <h3>${store.state.activeBoard.title}</h3>
+      <p>${store.state.activeBoard.description}</p>    
+    </div>
+    <div class="col-4">
+      <h3 class="text-white mt-2">Welcome ${store.state.user.userName}!</h3>
+      <button onClick="app.controllers.list.createList()" class="btn btn-secondary mt-1">Add New List</button>
+    </div>
+   </div>
+  `
+  boardHeader.innerHTML = template
 }
 
 
