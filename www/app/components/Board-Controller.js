@@ -15,7 +15,7 @@ function drawBoards() {
           <div>Created: ${new Date(board.created).toDateString()}</div>
           <div>
             <i class="fa fa-arrows-alt clickable" aria-hidden="true" 
-            onclick="app.controllers.board.showBoardDetails('${board._id};
+            onclick="app.controllers.board.showBoardDetails('${board._id}');
             app.controllers.list.getLists('${board._id}')"></i>&nbsp&nbsp
             <i class="fa fa-trash clickable" onclick="app.controllers.board.deleteBoard('${board._id}')" aria-hidden="true"></i>
           </div>

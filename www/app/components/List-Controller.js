@@ -1,4 +1,4 @@
-import Store from "../store/store";
+import Store from "../store/store.js";
 
 let store = new Store()
 
@@ -22,6 +22,7 @@ export default class ListController {
 
   getLists(boardId) {
     console.log("getting lists")
+    drawListButtons();
   }
 
 }
