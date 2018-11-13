@@ -17,9 +17,11 @@ function drawLists() {
       <h6>Created:  ${new Date(list.created).toDateString()}</h6>
       <br />
       <p>${list.description}</p>
+      <button class="btn btn-primary">Delete List</button>
+      <button class="btn btn-primary">Add Task</button>
       <hr />        
     `
-
+    //if tasks are associated with list, draw a card for each task
     if (store.state.activeTasks[list._id]) {
       store.state.activeTasks[list._id].forEach(task => {
         template += `

@@ -105,6 +105,9 @@ export default class Store {
     api.get('/boards')
       .then(res => {
         setState('boards', res.data)
+        setState('activeBoard', {})
+        setState('activeLists', [])
+        setState('activeTasks', {})
         drawBoards()
       })
       .catch(err => console.error(err))
