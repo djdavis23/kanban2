@@ -23,10 +23,21 @@ function drawLists() {
     if (store.state.activeTasks[list._id]) {
       store.state.activeTasks[list._id].forEach(task => {
         template += `
-          <h4>${task.title}</h4>
-          <p>${task.description}</p>
-          <hr />
-          <br />
+          <div class="card mb-3" style="max-width: 20rem;">
+            <div class="card-header bg-secondary text-white flexbox">
+              <div>Created: ${new Date(task.created).toDateString()}</div>
+              <div>
+                <i class="fa fa-arrows-alt clickable" aria-hidden="true" 
+                onclick="app.controllers.task.showTaskDetails('${task._id}');
+                app.controllers.task.getComments('${task._id}')"></i>&nbsp&nbsp
+                <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${task._id}')" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="card-body bg-light text-primary">
+              <h4 class="card-title">${task.title}</h4>
+              <p class="card-text">${task.description}</p>
+            </div>
+          </div>
         `
       })
     }

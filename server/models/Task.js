@@ -12,7 +12,7 @@ let schema = new Schema({
   boardId: { type: ObjectId, reference: 'Board', required: true },
   userId: { type: ObjectId, reference: 'User', required: true },
   status: { type: String, required: true, default: "To-Do" },
-  created: { type: String, required: true, default: Date.now() }
+  created: { type: Number, required: true, default: Date.now() }
 })
 
 
