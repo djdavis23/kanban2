@@ -7,7 +7,8 @@ let store;
 //program state data
 let state = {
   user: {},
-  boards: []
+  boards: [],
+  activeBoard: {}
 }
 
 //routers
@@ -112,6 +113,15 @@ export default class Store {
   deleteBoard(boardId, drawBoards) {
     api.delete(`/boards/${boardId}`)
       .then(res => this.getBoards(drawBoards))
+      .catch(err => console.error(err))
+  }
+
+  setActiveBoard(boardId, drawActiveBoard) {
+    api.get(`/boards/${boardId}`)
+      .then(res => {
+        setState('activeBoard', res.data)
+        drawActiveBoard()
+      })
       .catch(err => console.error(err))
   }
 }

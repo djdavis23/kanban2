@@ -15,7 +15,8 @@ function drawBoards() {
           <div>Created: ${new Date(board.created).toDateString()}</div>
           <div>
             <i class="fa fa-arrows-alt clickable" aria-hidden="true" 
-            onclick="app.controllers.board.showBoardDetails('${board._id}')"></i>&nbsp&nbsp
+            onclick="app.controllers.board.showBoardDetails('${board._id};
+            app.controllers.list.getLists('${board._id}')"></i>&nbsp&nbsp
             <i class="fa fa-trash clickable" onclick="app.controllers.board.deleteBoard('${board._id}')" aria-hidden="true"></i>
           </div>
         </div>
@@ -27,20 +28,23 @@ function drawBoards() {
     </div>     
     `
   })
-
-  function drawListButtons() {
-    template = `
-     <div class="row">
-      <div class="col-8"></div>
-      <div class="col-4">
-        <h3 class="text-white mt-2">Welcome ${store.state.user.userName}!</h3>
-        <button onClick="app.controllers.list.createList()" class="btn btn-secondary mt-1">Add New List</button>
-      </div>
-     </div>
-    `
-  }
-
   contentPane.innerHTML = template
+}
+
+function drawActiveBoard() {
+  console.log("drawing active board")
+}
+
+function drawListButtons() {
+  let template = `
+   <div class="row">
+    <div class="col-8"></div>
+    <div class="col-4">
+      <h3 class="text-white mt-2">Welcome ${store.state.user.userName}!</h3>
+      <button onClick="app.controllers.list.createList()" class="btn btn-secondary mt-1">Add New List</button>
+    </div>
+   </div>
+  `
 }
 
 
@@ -61,8 +65,9 @@ export default class BoardController {
   }
 
   showBoardDetails(boardId) {
-    console.log("Retrieving board details")
+    store.setActiveBoard(boardId, drawActiveBoard)
   }
+
 
   deleteBoard(boardId) {
     console.log("Deleting Board")

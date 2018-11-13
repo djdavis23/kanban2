@@ -2,8 +2,8 @@ import Store from "../store/store.js"
 
 let store = new Store()
 
-const userForm = document.getElementById('user-form')
-const userButtons = document.getElementById('user-buttons')
+const userForm = document.getElementById('header-right')
+const userButtons = document.getElementById('header-left')
 var newUser = null;
 var loggedIn = false;
 
