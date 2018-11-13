@@ -132,7 +132,21 @@ export default class Store {
     api.get(`/lists/by-board/${boardId}`, drawLists)
       .then(res => {
         setState('activeLists', res.data)
+        res.data.forEach(list => {
+          this.getTasksByList(list._id)
+        })
         drawLists()
+      })
+      .catch(err => console.error(err))
+  }
+
+
+
+  //TASK METHODS
+  getTasksByList(listId) {
+    api.get(`/tasks/by-list/${listId}`)
+      .then(res => {
+        setState(`activeTasks[${listId}]`, res.data)
       })
       .catch(err => console.error(err))
   }
