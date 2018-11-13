@@ -8,7 +8,9 @@ let store;
 let state = {
   user: {},
   boards: [],
-  activeBoard: {}
+  activeBoard: {},
+  activeLists: [],
+  activeTasks: {}
 }
 
 //routers
@@ -121,6 +123,16 @@ export default class Store {
       .then(res => {
         setState('activeBoard', res.data)
         drawActiveBoard()
+      })
+      .catch(err => console.error(err))
+  }
+
+  //LIST METHODS
+  getListsByBoard(boardId, drawLists) {
+    api.get(`/lists/by-board/${boardId}`, drawLists)
+      .then(res => {
+        setState('activeLists', res.data)
+        drawLists()
       })
       .catch(err => console.error(err))
   }

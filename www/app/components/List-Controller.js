@@ -12,8 +12,7 @@ function drawLists() {
 export default class ListController {
 
   getLists(boardId) {
-    console.log("getting lists")
-    drawLists();
+    store.getListsByBoard(boardId, drawLists)
   }
 
 }
