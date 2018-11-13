@@ -10,6 +10,15 @@ router.get("/", (req, res, next) => {
     .catch(next)
 })
 
+//GET BOARD BY ID
+router.get('/:boardId', (req, res, next) => {
+  Boards.findById(req.params.boardId)
+    .then(board => {
+      return res.status(200).send(board)
+    })
+    .catch(next)
+})
+
 //POST A NEW BOARD
 router.post('/', (req, res, next) => {
   req.body.author = req.session.uid
