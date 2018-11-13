@@ -14,7 +14,7 @@ function drawLists() {
     <div class="col-4">
       <h3>${list.title}</h3>
       <h6>Creator:  ${list.author}</h6>
-      <h6>Created:  ${list.created}</h6>
+      <h6>Created:  ${new Date(list.created).toDateString()}</h6>
       <br />
       <p>${list.description}</p>
       <hr />        
