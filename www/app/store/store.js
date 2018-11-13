@@ -31,6 +31,10 @@ function setState(prop, data) {
   console.log(state);
 }
 
+function addActiveTask(listId, tasks) {
+  state.activeTasks[listId] = tasks
+}
+
 
 export default class Store {
   //singleton constructor
@@ -122,6 +126,7 @@ export default class Store {
     api.get(`/boards/${boardId}`)
       .then(res => {
         setState('activeBoard', res.data)
+        setState('activeTasks', {})
         drawActiveBoard()
       })
       .catch(err => console.error(err))
@@ -133,20 +138,20 @@ export default class Store {
       .then(res => {
         setState('activeLists', res.data)
         res.data.forEach(list => {
-          this.getTasksByList(list._id)
+          this.getTasksByList(list._id, drawLists)
         })
       })
-      .then(() => drawLists())
       .catch(err => console.error(err))
   }
 
 
 
   //TASK METHODS
-  getTasksByList(listId) {
+  getTasksByList(listId, drawLists) {
     api.get(`/tasks/by-list/${listId}`)
       .then(res => {
-        setState(`activeTasks[${listId}]`, res.data)
+        addActiveTask(listId, res.data)
+        drawLists()
       })
       .catch(err => console.error(err))
   }

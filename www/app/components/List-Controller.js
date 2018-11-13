@@ -19,14 +19,17 @@ function drawLists() {
       <p>${list.description}</p>
       <hr />        
     `
-    store.state.activeTasks[list._id].forEach(task => {
-      template += `
-        <h4>${task.title}</h4>
-        <p>${task.description}</p>
-        <hr />
-        <br />
-      `
-    })
+
+    if (store.state.activeTasks[list._id]) {
+      store.state.activeTasks[list._id].forEach(task => {
+        template += `
+          <h4>${task.title}</h4>
+          <p>${task.description}</p>
+          <hr />
+          <br />
+        `
+      })
+    }
     template += '</div>'
   })
 
