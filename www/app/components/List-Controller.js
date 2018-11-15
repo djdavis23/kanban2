@@ -55,8 +55,16 @@ export default class ListController {
     store.getListsByBoard(boardId, drawLists)
   }
 
-  createList() {
-    console.log("create a new list")
+  createList(event) {
+    event.preventDefault()
+    let newList = {
+      title: event.target.title.value,
+      description: event.target.description.value,
+      boardId: store.state.activeBoard._id
+    }
+
+    store.createList(newList, newList.boardId, drawLists)
+    event.target.reset()
   }
 
   deleteList(listId) {

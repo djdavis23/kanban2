@@ -152,6 +152,12 @@ export default class Store {
       .catch(err => console.error(err))
   }
 
+  createList(newList, boardId, drawLists) {
+    api.post('/lists', newList)
+      .then(res => this.getListsByBoard(boardId, drawLists))
+      .catch(err => console.error(err))
+  }
+
   deleteListsByBoard(boardId) {
     api.delete(`/lists/by-board/${boardId}`)
       .then(() => setState('activeLists', []))
