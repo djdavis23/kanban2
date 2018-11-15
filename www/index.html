@@ -59,6 +59,33 @@
           </div>
         </div>
 
+        <!--  New List Modal -->
+        <div class="modal fade" id="newListModal" tabindex="-1" role="dialog" aria-labelledby="newListModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-light text-primary">
+                <h5 class="modal-title" id="newListModalLabel">Create New List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form onSubmit="app.controllers.board.createList(event); $('#newListModal').modal('hide')">
+                <div class="modal-body">
+                  <form-group>
+                    <input type="text" name="title" class="form-control" placeholder="List Title" required>
+                    <textarea class="form-control mt-2" name="description" placeholder="Description" rows="5" cols="30"
+                      required></textarea>
+                  </form-group>
+                </div>
+                <div class="modal-footer bg-light">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
 
         <div id="main-content" class="row">
 

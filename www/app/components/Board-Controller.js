@@ -57,7 +57,7 @@ function drawActiveBoard() {
     </div>
     <div class="col-4">
       <h3 class="text-white mt-2">Welcome ${store.state.user.userName}!</h3>
-      <button onClick="app.controllers.list.showListForm()" class="btn btn-secondary mt-1">Add New List</button>
+      <button class="btn btn-secondary mt-1" type="button" data-toggle="modal" data-target="#newListModal">Add New List</button>
       <button onClick="app.controllers.board.getBoards()" class="btn btn-secondary mt-1">Boards View</button>
 
     </div>
