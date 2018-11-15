@@ -31,6 +31,7 @@ function drawBoards() {
   })
   contentPane.innerHTML = template
 
+  //refactor to draw board header
   let templateHeader = `
      <div class="row">
       <div class="col-8"></div>
