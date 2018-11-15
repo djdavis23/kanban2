@@ -7,7 +7,7 @@ const userButtons = document.getElementById('header-left')
 var newUser = null;
 var loggedIn = false;
 
-function drawUserButtons() {
+function drawHeaderLeft() {
   let template
 
   if (!loggedIn) {
@@ -27,7 +27,7 @@ function drawUserButtons() {
 
 }
 
-function drawUserForm() {
+function drawHeaderRight() {
   let template
 
   if (loggedIn) {
@@ -100,17 +100,17 @@ function setUserStatus(status) {
 export default class UserController {
 
   constructor() {
-    store.authenticate(setUserStatus, drawUserButtons, drawUserForm)
+    store.authenticate(setUserStatus, drawHeaderLeft, drawHeaderRight)
   }
 
   showLogin() {
     newUser = false
-    drawUserForm();
+    drawHeaderRight();
   }
 
   showRegister() {
     newUser = true
-    drawUserForm()
+    drawHeaderRight()
   }
 
   register(e) {
@@ -123,7 +123,7 @@ export default class UserController {
       userName: e.target.userName.value,
       email: e.target.email.value,
       password: e.target.password.value
-    }, setUserStatus, drawUserButtons, drawUserForm)
+    }, setUserStatus, drawHeaderLeft, drawHeaderRight)
     // e.target.reset()
   }
 
@@ -132,13 +132,13 @@ export default class UserController {
     store.login({
       email: e.target.email.value,
       password: e.target.password.value
-    }, setUserStatus, drawUserButtons, drawUserForm)
+    }, setUserStatus, drawHeaderLeft, drawHeaderRight)
     //console.log(e.target.email.value, e.target.password.value)
 
   }
 
   logout() {
-    store.logout(setUserStatus, drawUserButtons, drawUserForm);
+    store.logout(setUserStatus, drawHeaderLeft, drawHeaderRight);
     newUser = null;
     document.getElementById('main-content').innerHTML = ""
     document.getElementById('detail-pane').innerHTML = ""
