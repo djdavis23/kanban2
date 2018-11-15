@@ -2,9 +2,6 @@ import Store from "../store/store.js";
 
 let store = new Store()
 
-var newListFormVisible = false
-
-
 const boardDetails = document.getElementById("main-content")
 
 
@@ -56,10 +53,6 @@ export default class ListController {
 
   getLists(boardId) {
     store.getListsByBoard(boardId, drawLists)
-  }
-
-  showListForm() {
-    newListFormVisible = !newListFormVisible
   }
 
   createList() {
