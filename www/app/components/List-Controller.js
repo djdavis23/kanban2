@@ -2,6 +2,9 @@ import Store from "../store/store.js";
 
 let store = new Store()
 
+var newListFormVisible = false
+
+
 const boardDetails = document.getElementById("main-content")
 
 
@@ -17,8 +20,8 @@ function drawLists() {
       <h6>Created:  ${new Date(list.created).toDateString()}</h6>
       <br />
       <p>${list.description}</p>
-      <button class="btn btn-primary">Delete List</button>
-      <button class="btn btn-primary">Add Task</button>
+      <button onclick="app.controllers.list.deleteList(list._id)" class="btn btn-primary">Delete List</button>
+      <button onclick="app.controllers.task.showTaskForm(list._id)" class="btn btn-primary">Add Task</button>
       <hr />        
     `
     //if tasks are associated with list, draw a card for each task
@@ -53,6 +56,18 @@ export default class ListController {
 
   getLists(boardId) {
     store.getListsByBoard(boardId, drawLists)
+  }
+
+  showListForm() {
+    newListFormVisible = !newListFormVisible
+  }
+
+  createList() {
+    console.log("create a new list")
+  }
+
+  deleteList(listId) {
+    console.log(`deleting list ${listId}`)
   }
 
 }

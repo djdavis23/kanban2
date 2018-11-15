@@ -163,17 +163,17 @@ export default class Store {
       .then(() => this.getListsByBoard(boardId, drawLists))
       .catch(err => console.error(err))
   }
-}
 
 
 
-//TASK METHODS
-getTasksByList(listId, drawLists) {
-  api.get(`/tasks/by-list/${listId}`)
-    .then(res => {
-      addActiveTask(listId, res.data)
-      drawLists()
-    })
-    .catch(err => console.error(err))
-}
+
+  //TASK METHODS
+  getTasksByList(listId, drawLists) {
+    api.get(`/tasks/by-list/${listId}`)
+      .then(res => {
+        addActiveTask(listId, res.data)
+        drawLists()
+      })
+      .catch(err => console.error(err))
+  }
 }
