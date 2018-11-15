@@ -101,7 +101,7 @@ export default class Store {
   }
 
   //board methods
-  getBoards(drawBoards) {
+  getBoards(drawBoards, drawBoardsHeader) {
     api.get('/boards')
       .then(res => {
         setState('boards', res.data)
@@ -109,6 +109,7 @@ export default class Store {
         setState('activeLists', [])
         setState('activeTasks', {})
         drawBoards()
+        drawBoardsHeader()
       })
       .catch(err => console.error(err))
   }
@@ -143,6 +144,7 @@ export default class Store {
         res.data.forEach(list => {
           this.getTasksByList(list._id, drawLists)
         })
+        drawLists()
       })
       .catch(err => console.error(err))
   }

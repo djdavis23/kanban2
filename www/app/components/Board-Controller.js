@@ -30,18 +30,20 @@ function drawBoards() {
     `
   })
   contentPane.innerHTML = template
+}
 
+function drawBoardsHeader() {
   //refactor to draw board header
   let templateHeader = `
-     <div class="row">
-      <div class="col-8"></div>
-      <div class="col-4">
-        <h3 class="text-white mt-2">Welcome ${store.state.user.userName}!</h3>
-        <button onClick="app.controllers.board.getBoards()" class="btn btn-secondary mt-1">Retrieve Boards</button>
-        <button class="btn btn-secondary mt-1" type="button" data-toggle="modal" data-target="#newBoardModal">Create Board</button>
-      </div>
-     </div>
-    `
+   <div class="row">
+    <div class="col-8"></div>
+    <div class="col-4">
+      <h3 class="text-white mt-2">Welcome ${store.state.user.userName}!</h3>
+      <button onClick="app.controllers.board.getBoards()" class="btn btn-secondary mt-1">Retrieve Boards</button>
+      <button class="btn btn-secondary mt-1" type="button" data-toggle="modal" data-target="#newBoardModal">Create Board</button>
+    </div>
+   </div>
+  `
   boardHeader.innerHTML = templateHeader
 }
 
@@ -70,7 +72,7 @@ function drawActiveBoard() {
 export default class BoardController {
 
   getBoards() {
-    store.getBoards(drawBoards);
+    store.getBoards(drawBoards, drawBoardsHeader);
   }
 
   createBoard(e) {
