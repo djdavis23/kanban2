@@ -68,7 +68,6 @@ export default class ListController {
   }
 
   deleteList(listId) {
-    console.log(`deleting list ${listId}`)
     store.deleteList(listId, drawLists)
   }
 

@@ -114,17 +114,17 @@ export default class Store {
       .catch(err => console.error(err))
   }
 
-  createBoard(newBoard, drawBoards) {
+  createBoard(newBoard, drawBoards, drawBoardsHeader) {
     api.post('/boards', newBoard)
-      .then(res => this.getBoards(drawBoards))
+      .then(res => this.getBoards(drawBoards, drawBoardsHeader))
       .catch(err => console.error(err))
   }
 
-  deleteBoard(boardId, drawBoards) {
+  deleteBoard(boardId, drawBoards, drawBoardsHeader) {
     api.delete(`/boards/${boardId}`)
       .then(res => {
         this.deleteListsByBoard(boardId)
-        this.getBoards(drawBoards)
+        this.getBoards(drawBoards, drawBoardsHeader)
       })
       .catch(err => console.error(err))
   }

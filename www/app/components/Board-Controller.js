@@ -48,7 +48,6 @@ function drawBoardsHeader() {
 }
 
 function drawActiveBoard() {
-  console.log("drawing active board")
   let template = `
    <div class="row">
     <div class="col-8 text-white">
@@ -81,7 +80,7 @@ export default class BoardController {
       title: e.target.title.value,
       description: e.target.description.value
     }
-    store.createBoard(newBoard, drawBoards);
+    store.createBoard(newBoard, drawBoards, drawBoardsHeader);
     e.target.reset()
   }
 
@@ -92,7 +91,7 @@ export default class BoardController {
 
   deleteBoard(boardId) {
     console.log("Deleting Board")
-    store.deleteBoard(boardId, drawBoards)
+    store.deleteBoard(boardId, drawBoards, drawBoardsHeader)
   }
 
 
