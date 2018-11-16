@@ -164,7 +164,8 @@ export default class Store {
       .catch(err => console.error(err))
   }
 
-  deleteList(listId, boardId, drawLists) {
+  deleteList(listId, drawLists) {
+    let boardId = state.activeBoard._id
     api.delete(`/lists/${listId}`)
       .then(() => this.getListsByBoard(boardId, drawLists))
       .catch(err => console.error(err))

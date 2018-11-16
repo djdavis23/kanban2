@@ -17,7 +17,7 @@ function drawLists() {
       <h6>Created:  ${new Date(list.created).toDateString()}</h6>
       <br />
       <p>${list.description}</p>
-      <button onclick="app.controllers.list.deleteList(list._id)" class="btn btn-primary">Delete List</button>
+      <button onclick="app.controllers.list.deleteList('${list._id}')" class="btn btn-primary">Delete List</button>
       <button onclick="app.controllers.task.showTaskForm(list._id)" class="btn btn-primary">Add Task</button>
       <hr />        
     `
@@ -69,6 +69,7 @@ export default class ListController {
 
   deleteList(listId) {
     console.log(`deleting list ${listId}`)
+    store.deleteList(listId, drawLists)
   }
 
 }
