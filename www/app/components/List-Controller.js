@@ -4,12 +4,14 @@ let store = new Store()
 
 const boardDetails = document.getElementById("main-content")
 
-
+//this function draws each list associated with the active board.  It shows
+//list title and description followed by a summary view  of each task
+//on the list
 function drawLists() {
-  console.log("drawing lists")
-  //draw list header
   let template = ""
+  //draw each list associated with the active board
   store.state.activeLists.forEach(list => {
+    //first draw the list title and description
     template += `
     <div class="col-4">
       <h3>${list.title}</h3>
@@ -51,10 +53,12 @@ function drawLists() {
 
 export default class ListController {
 
+  //retrieve all lists associated with the specified board
   getLists(boardId) {
     store.getListsByBoard(boardId, drawLists)
   }
 
+  //create a new list from the field of the new list form
   createList(event) {
     event.preventDefault()
     let newList = {
@@ -67,6 +71,7 @@ export default class ListController {
     event.target.reset()
   }
 
+  //delete the specified list (and associated tasks -- see store)
   deleteList(listId) {
     store.deleteList(listId, drawLists)
   }
