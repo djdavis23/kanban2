@@ -20,7 +20,7 @@ function drawLists() {
       <br />
       <p>${list.description}</p>
       <button onclick="app.controllers.list.deleteList('${list._id}')" class="btn btn-primary">Delete List</button>
-      <button onclick="app.controllers.task.showTaskForm(list._id)" class="btn btn-primary">Add Task</button>
+      <button onclick="app.controllers.task.showTaskForm('${list._id}')" class="btn btn-primary">Add Task</button>
       <hr />        
     `
     //if tasks are associated with list, draw a card for each task

@@ -29,6 +29,7 @@ export default class TaskController {
     this.activeListId = listId;
     showTaskDetails = false;
     newTaskFormVisible = !newTaskFormVisible;
+    drawDetailPane()
   }
 
   createTask(event) {
