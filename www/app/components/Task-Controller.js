@@ -38,6 +38,9 @@ export default class TaskController {
 
   showTaskDetails(taskId) {
     console.log(`show detail for task ${taskId}`)
+    newTaskFormVisible = false
+    showTaskDetails = true
+    drawDetailPane()
   }
 
   getComments(taskId) {
