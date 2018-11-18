@@ -14,7 +14,18 @@ function drawDetailPane() {
   var template = "";
   if (newTaskFormVisible) {
     template += `
-      <h2 class="text-primary">Task Form Here</h2>
+    <h4>Create New Task:</h4>
+    <form onSubmit="app.controllers.task.createTask(event)">
+      <input type="text" class="form-control mt-2" name="title" placeholder="title" required />
+      <input type="text" class="form-control mt-2" name="description" placeholder="description" required>
+      <label for="status" class="mt-2">Task Status:</label>
+      <select class="form-control" name="status" id="task-status">
+        <option value="To-Do" selected>To-Do</option>
+        <option value="In-Work">In-Work</option>
+        <option value="Complete">Complete</option>
+      </select>
+      <button type="Submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
     `
   }
   else if (showTaskDetails) {
