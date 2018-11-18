@@ -45,6 +45,17 @@ export default class TaskController {
 
   createTask(event) {
     console.log(`creating new task for list ${activeListId}`)
+    event.preventDefault();
+    let newTask = {
+      title: event.target.title.value,
+      description: event.target.description.value,
+      listId: this.activeListId,
+      boardId: store.state.activeBoard._id,
+      status: event.target.status.value
+    }
+    newTaskFormVisible = false
+    event.target.reset()
+    store.createTask(newTask, activeListId, drawDetailPane)
   }
 
   showTaskDetails(taskId) {
