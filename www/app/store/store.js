@@ -184,9 +184,9 @@ export default class Store {
       .catch(err => console.error(err))
   }
 
-  createTask(newTask, listId, drawLists) {
+  createTask(newTask, listId, drawMainContent) {
     api.post('/tasks', newTask)
-      .then(res => this.getTasksByList(listId, drawLists))
+      .then(res => this.getTasksByList(listId, drawMainContent))
       .catch(err => console.error(err))
 
   }

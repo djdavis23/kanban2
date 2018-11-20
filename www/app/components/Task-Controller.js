@@ -8,7 +8,8 @@ var showTaskDetails = false;
 
 var activeListId;
 
-var detailPane = document.getElementById('detail-pane');
+const detailPane = document.getElementById('detail-pane');
+const mainContent = document.getElementById('main-content');
 
 function drawDetailPane() {
   var template = "";
@@ -34,6 +35,50 @@ function drawDetailPane() {
   detailPane.innerHTML = template;
 }
 
+function drawMainContent() {
+  let template = ""
+  //draw each list associated with the active board
+  store.state.activeLists.forEach(list => {
+    //first draw the list title and description
+    template += `
+    <div class="col-4">
+      <h3>${list.title}</h3>
+      <h6>Creator:  ${list.author}</h6>
+      <h6>Created:  ${new Date(list.created).toDateString()}</h6>
+      <br />
+      <p>${list.description}</p>
+      <button onclick="app.controllers.list.deleteList('${list._id}')" class="btn btn-primary">Delete List</button>
+      <button onclick="app.controllers.task.showTaskForm('${list._id}')" class="btn btn-primary">Add Task</button>
+      <hr />        
+    `
+    //if tasks are associated with list, draw a card for each task
+    if (store.state.activeTasks[list._id]) {
+      store.state.activeTasks[list._id].forEach(task => {
+        template += `
+          <div class="card mb-3" style="max-width: 20rem;">
+            <div class="card-header bg-secondary text-white flexbox">
+              <div>Created: ${new Date(task.created).toDateString()}</div>
+              <div>
+                <i class="fa fa-arrows-alt clickable" aria-hidden="true" 
+                onclick="app.controllers.task.showTaskDetails('${task._id}');
+                app.controllers.task.getComments('${task._id}')"></i>&nbsp&nbsp
+                <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${task._id}')" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="card-body bg-light text-primary">
+              <h4 class="card-title">${task.title}</h4>
+              <p class="card-text">${task.description}</p>
+            </div>
+          </div>
+        `
+      })
+    }
+    template += '</div>'
+  })
+
+  mainContent.innerHTML = template
+}
+
 export default class TaskController {
 
   showTaskForm(listId) {
@@ -55,7 +100,9 @@ export default class TaskController {
     }
     newTaskFormVisible = false
     event.target.reset()
-    store.createTask(newTask, activeListId, drawDetailPane)
+    store.createTask(newTask, activeListId, drawMainContent)
+    console.log("active list id: ", activeListId)
+    drawDetailPane()
   }
 
   showTaskDetails(taskId) {
