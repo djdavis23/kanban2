@@ -34,7 +34,7 @@ function drawLists() {
                 <i class="fa fa-arrows-alt clickable" aria-hidden="true" 
                 onclick="app.controllers.task.showTaskDetails('${task._id}');
                 app.controllers.task.getComments('${task._id}')"></i>&nbsp&nbsp
-                <i class="fa fa-trash clickable" onclick="app.controllers.task.setActiveListId('${task.listId}'); app.controllers.task.deleteTask('${task._id}')" aria-hidden="true"></i>
+                <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${task._id}', '${task.listId}')" aria-hidden="true"></i>
               </div>
             </div>
             <div class="card-body bg-light text-primary">

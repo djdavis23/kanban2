@@ -62,7 +62,7 @@ function drawMainContent() {
                 <i class="fa fa-arrows-alt clickable" aria-hidden="true" 
                 onclick="app.controllers.task.showTaskDetails('${task._id}');
                 app.controllers.task.getComments('${task._id}')"></i>&nbsp&nbsp
-                <i class="fa fa-trash clickable" onclick="app.controllers.task.setActiveListId('${task.listId}'); app.controllers.task.deleteTask('${task._id}')" aria-hidden="true"></i>
+                <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${task._id}', '${task.listId}')" aria-hidden="true"></i>
               </div>
             </div>
             <div class="card-body bg-light text-primary">
@@ -88,13 +88,7 @@ export default class TaskController {
     drawDetailPane()
   }
 
-  setActiveListId(listId) {
-    activeListId = listId
-    console.log("activeListId now set to ", activeListId)
-  }
-
   createTask(event) {
-    console.log(`creating new task for list ${activeListId}`)
     event.preventDefault();
     let newTask = {
       title: event.target.title.value,
@@ -106,8 +100,6 @@ export default class TaskController {
     newTaskFormVisible = false
     event.target.reset()
     store.createTask(newTask, activeListId, drawMainContent)
-    console.log("active list id: ", activeListId)
-    console.log("task.listId ", newTask.listId)
     drawDetailPane()
   }
 
@@ -122,9 +114,7 @@ export default class TaskController {
     console.log(`get comments for task ${taskId}`)
   }
 
-  deleteTask(taskId) {
-    console.log(`delete task ${taskId}`)
-    console.log('redrawing list ', activeListId)
-    store.deleteTask(taskId, activeListId, drawMainContent)
+  deleteTask(taskId, listId) {
+    store.deleteTask(taskId, listId, drawMainContent)
   }
 }
