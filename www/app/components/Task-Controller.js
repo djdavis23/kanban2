@@ -62,7 +62,7 @@ function drawMainContent() {
                 <i class="fa fa-arrows-alt clickable" aria-hidden="true" 
                 onclick="app.controllers.task.showTaskDetails('${task._id}');
                 app.controllers.task.getComments('${task._id}')"></i>&nbsp&nbsp
-                <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${task._id}')" aria-hidden="true"></i>
+                <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${task._id}', '${task.listId}')" aria-hidden="true"></i>
               </div>
             </div>
             <div class="card-body bg-light text-primary">
@@ -116,7 +116,8 @@ export default class TaskController {
     console.log(`get comments for task ${taskId}`)
   }
 
-  deleteTask(taskId) {
+  deleteTask(taskId, listId) {
     console.log(`delete task ${taskId}`)
+    store.deleteTask(taskId, listId, drawMainContent)
   }
 }

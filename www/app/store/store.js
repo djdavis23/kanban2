@@ -188,6 +188,14 @@ export default class Store {
     api.post('/tasks', newTask)
       .then(res => this.getTasksByList(listId, drawMainContent))
       .catch(err => console.error(err))
+  }
 
+  deleteTask(taskId, listId, draw) {
+    api.delete(`/tasks/${taskId}`)
+      .then(() => {
+        //delete comments
+        this.getTasksByList(listId, draw)
+      })
+      .catch(err => console.error(err))
   }
 }
