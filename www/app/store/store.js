@@ -198,4 +198,9 @@ export default class Store {
       })
       .catch(err => console.error(err))
   }
+
+  getTask(taskId, listId) {
+    let taskList = state.activeTasks[listId]
+    return taskList.find(task => task._id == taskId)
+  }
 }

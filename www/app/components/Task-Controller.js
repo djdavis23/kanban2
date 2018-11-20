@@ -8,6 +8,8 @@ var showTaskDetails = false;
 
 var activeListId;
 
+var activeTask;
+
 const detailPane = document.getElementById('detail-pane');
 const mainContent = document.getElementById('main-content');
 
@@ -30,7 +32,9 @@ function drawDetailPane() {
     `
   }
   else if (showTaskDetails) {
-
+    template += `
+      <h4>Task ID:  ${activeTask._id}</h4>
+    `
   }
   detailPane.innerHTML = template;
 }
@@ -65,7 +69,7 @@ function drawMainContent() {
               <div>Created: ${new Date(task.created).toDateString()}</div>
               <div>
                 <i class="fa fa-arrows-alt clickable" aria-hidden="true" 
-                onclick="app.controllers.task.showTaskDetails('${task._id}');
+                onclick="app.controllers.task.showTaskDetails('${task._id}', '${task.listId}');
                 app.controllers.task.getComments('${task._id}')"></i>&nbsp&nbsp
                 <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${task._id}', '${task.listId}')" aria-hidden="true"></i>
               </div>
@@ -108,8 +112,9 @@ export default class TaskController {
     drawDetailPane()
   }
 
-  showTaskDetails(taskId) {
-    console.log(`show detail for task ${taskId}`)
+  showTaskDetails(taskId, listId) {
+    console.log("show detail for task ", taskId)
+    activeTask = store.getTask(taskId, listId)
     newTaskFormVisible = false
     showTaskDetails = true
     drawDetailPane()
