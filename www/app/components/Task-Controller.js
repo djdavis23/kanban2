@@ -35,6 +35,11 @@ function drawDetailPane() {
   detailPane.innerHTML = template;
 }
 
+
+/*  This draw function is a replica of drawLists() in the list controller.  I don't like
+the repeated code, but I need to redraw after creating or deleting tasks and I could not 
+figure out how to invoke the drawLists() method from the task controller
+*/
 function drawMainContent() {
   let template = ""
   //draw each list associated with the active board
