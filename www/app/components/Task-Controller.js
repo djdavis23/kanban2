@@ -82,7 +82,7 @@ function drawMainContent() {
 export default class TaskController {
 
   showTaskForm(listId) {
-    this.activeListId = listId;
+    activeListId = listId;
     showTaskDetails = false;
     newTaskFormVisible = !newTaskFormVisible;
     drawDetailPane()
@@ -94,7 +94,7 @@ export default class TaskController {
     let newTask = {
       title: event.target.title.value,
       description: event.target.description.value,
-      listId: this.activeListId,
+      listId: activeListId,
       boardId: store.state.activeBoard._id,
       status: event.target.status.value
     }
