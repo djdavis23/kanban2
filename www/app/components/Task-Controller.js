@@ -33,7 +33,20 @@ function drawDetailPane() {
   }
   else if (showTaskDetails) {
     template += `
-      <h4>Task ID:  ${activeTask._id}</h4>
+      <h4 class="flexbox text-primary">
+        <span>Task Details</span>
+        <span>
+          <i class="fa fa-window-minimize clickable"></i>&nbsp<i class="fa fa-trash clickable"></i>
+        </span>
+      </h4>
+      <h4>${activeTask.title}</h4>
+      <p>${activeTask.description}</p>
+      <h5>Initiator: ${activeTask.userId}</h5>
+      <h5>Created: ${new Date(activeTask.created).toDateString()}</h5>
+      <h5>Status: ${activeTask.status}</h5>
+      <button class="btn btn-secondary">Add Comment</button>
+      <h5>Comments: </h5>
+      <hr />
     `
   }
   detailPane.innerHTML = template;
