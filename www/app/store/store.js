@@ -210,11 +210,19 @@ export default class Store {
   }
 
   //COMMENTS METHODS
-  getComments(taskId, draw) {
+  getCommentsByTask(taskId, draw) {
     api.get(`/comments/by-task/${taskId}`)
       .then(res => {
         addComments(taskId, res.data)
         draw()
+      })
+      .catch(err => console.error(err))
+  }
+
+  createComment(newComment, taskId, draw) {
+    api.post('/comments', newComment)
+      .then(res => {
+        this.getCommentsByTask(taskId, draw)
       })
       .catch(err => console.error(err))
   }

@@ -59,7 +59,7 @@ function drawDetailPane() {
     `
     if (commentFormVisible) {
       template += `
-        <form onsubmit="app.controller.task.addComment(event)">
+        <form onsubmit="app.controller.task.createComment(event)">
           <input type="text" name="content" placeholder="New comment here" required>
         </form>
       `
@@ -169,11 +169,24 @@ export default class TaskController {
 
   getComments(taskId) {
     console.log(`get comments for task ${taskId}`)
-    store.getComments(taskId, drawDetailPane)
+    store.getCommentsByTask(taskId, drawDetailPane)
   }
 
   newComment() {
     commentFormVisible = true
     drawDetailPane()
+  }
+
+  createComment(e) {
+    e.preventDefault()
+    let newComment = {
+      content: e.target.content.value,
+      userId: store.state.user._id,
+      userName: store.state.user.userName,
+      taskId: activeTask._id
+    }
+    store.createComment(newComment, activeTask._id, drawDetailPane)
+    e.target.reset
+    commentFormVisible = false
   }
 }
