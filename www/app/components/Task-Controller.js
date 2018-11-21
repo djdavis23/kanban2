@@ -59,7 +59,7 @@ function drawDetailPane() {
     `
     if (commentFormVisible) {
       template += `
-        <form onsubmit="app.controller.task.createComment(event)">
+        <form onsubmit="app.controllers.task.createComment(event)">
           <input type="text" name="content" placeholder="New comment here" required>
         </form>
       `
@@ -69,12 +69,14 @@ function drawDetailPane() {
       <h5>Comments: </h5>
       <hr />
     `
-    store.state.activeComments[activeTask._id].forEach(comment => {
-      template += `
-        <p>${comment.userName} &nbsp ${comment.content}</p>
+    if (store.state.activeComments[activeTask._id]) {
+      store.state.activeComments[activeTask._id].forEach(comment => {
+        template += `
+        <p>${comment.userName} &nbsp ${comment.content} &nbsp&nbsp <i class="fa fa-trash-alt"></i> </p>
         <hr />
       `
-    })
+      })
+    }
   }
   detailPane.innerHTML = template;
 }
