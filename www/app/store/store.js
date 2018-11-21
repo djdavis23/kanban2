@@ -10,7 +10,8 @@ let state = {
   boards: [],
   activeBoard: {},
   activeLists: [],
-  activeTasks: {}
+  activeTasks: {},
+  activeComments: {}
 }
 
 //routers
@@ -31,8 +32,12 @@ function setState(prop, data) {
   console.log(state);
 }
 
-function addActiveTask(listId, tasks) {
+function addTasks(listId, tasks) {
   state.activeTasks[listId] = tasks
+}
+
+function addComments(taskId, comments) {
+  state.activeComments[taskId] = comments
 }
 
 
@@ -178,7 +183,7 @@ export default class Store {
   getTasksByList(listId, drawLists) {
     api.get(`/tasks/by-list/${listId}`)
       .then(res => {
-        addActiveTask(listId, res.data)
+        addTasks(listId, res.data)
         drawLists()
       })
       .catch(err => console.error(err))
@@ -202,5 +207,15 @@ export default class Store {
   getTask(taskId, listId) {
     let taskList = state.activeTasks[listId]
     return taskList.find(task => task._id == taskId)
+  }
+
+  //COMMENTS METHODS
+  getComments(taskId, draw) {
+    api.get(`/comments/by-task/${taskId}`)
+      .then(res => {
+        addComments(taskId, res.data)
+        draw()
+      })
+      .catch(err => console.error(err))
   }
 }

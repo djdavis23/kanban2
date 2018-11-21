@@ -145,6 +145,7 @@ export default class TaskController {
 
   getComments(taskId) {
     console.log(`get comments for task ${taskId}`)
+    store.getComments(taskId, drawDetailPane
   }
 
   deleteTask(taskId, listId) {
