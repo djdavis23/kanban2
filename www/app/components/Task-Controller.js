@@ -2,20 +2,27 @@ import Store from "../store/store.js";
 
 var store = new Store();
 
+//toggled when user clicks on the "Add Task" button
 var newTaskFormVisible = false;
 
+//toggles to display details of the active task in the right panel
 var showTaskDetails = false;
 
+//tracks active list for input during task create/delete
 var activeListId;
 
+//currently selected task
 var activeTask;
 
 const detailPane = document.getElementById('detail-pane');
 const mainContent = document.getElementById('main-content');
 
+//draws the detail pane in the right panel.  Containers either the add task form,
+//details of the active task or it is blank
 function drawDetailPane() {
   var template = "";
   if (newTaskFormVisible) {
+    //display New Task Form
     template += `
     <h4>Create New Task:</h4>
     <form onSubmit="app.controllers.task.createTask(event)">
@@ -32,6 +39,7 @@ function drawDetailPane() {
     `
   }
   else if (showTaskDetails) {
+    //display details of the active task
     template += `
       <h4 class="flexbox text-primary">
         <span>Task Details</span>
@@ -53,8 +61,8 @@ function drawDetailPane() {
 }
 
 
-/*  This draw function is a replica of drawLists() in the list controller.  I don't like
-the repeated code, but I need to redraw after creating or deleting tasks and I could not 
+/*  This draw function is a replica of drawLists() in the list controller (NOT DRY).  
+I need to redraw after creating or deleting tasks and I could not 
 figure out how to invoke the drawLists() method from the task controller
 */
 function drawMainContent() {
@@ -103,6 +111,7 @@ function drawMainContent() {
 
 export default class TaskController {
 
+  //event listener for the "Add Task" button
   showTaskForm(listId) {
     activeListId = listId;
     showTaskDetails = false;
@@ -112,6 +121,7 @@ export default class TaskController {
 
   createTask(event) {
     event.preventDefault();
+    //build new task object from form input
     let newTask = {
       title: event.target.title.value,
       description: event.target.description.value,
