@@ -14,6 +14,9 @@ var activeListId;
 //currently selected task
 var activeTask;
 
+//toggles visibility of new comment form
+var commentFormVisible = false;
+
 const detailPane = document.getElementById('detail-pane');
 const mainContent = document.getElementById('main-content');
 
@@ -52,10 +55,26 @@ function drawDetailPane() {
       <h5>Initiator: ${activeTask.userId}</h5>
       <h5>Created: ${new Date(activeTask.created).toDateString()}</h5>
       <h5>Status: ${activeTask.status}</h5>
-      <button class="btn btn-secondary">Add Comment</button>
+      <button onclick="app.controllers.task.newComment()" class="btn btn-secondary">Add Comment</button>
+    `
+    if (commentFormVisible) {
+      template += `
+        <form onsubmit="app.controller.task.addComment(event)">
+          <input type="text" name="content" placeholder="New comment here" required>
+        </form>
+      `
+    }
+
+    template += `
       <h5>Comments: </h5>
       <hr />
     `
+    store.state.activeComments[activeTask._id].forEach(comment => {
+      template += `
+        <p>${comment.userName} &nbsp ${comment.content}</p>
+        <hr />
+      `
+    })
   }
   detailPane.innerHTML = template;
 }
@@ -143,12 +162,18 @@ export default class TaskController {
     drawDetailPane()
   }
 
-  getComments(taskId) {
-    console.log(`get comments for task ${taskId}`)
-    store.getComments(taskId, drawDetailPane
-  }
 
   deleteTask(taskId, listId) {
     store.deleteTask(taskId, listId, drawMainContent)
+  }
+
+  getComments(taskId) {
+    console.log(`get comments for task ${taskId}`)
+    store.getComments(taskId, drawDetailPane)
+  }
+
+  newComment() {
+    commentFormVisible = true
+    drawDetailPane()
   }
 }
