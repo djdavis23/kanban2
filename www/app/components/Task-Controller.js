@@ -72,7 +72,7 @@ function drawDetailPane() {
     if (store.state.activeComments[activeTask._id]) {
       store.state.activeComments[activeTask._id].forEach(comment => {
         template += `
-        <p>${comment.userName} &nbsp ${comment.content} &nbsp&nbsp <i class="fa fa-trash-alt"></i> </p>
+        <p>${comment.userName} &nbsp ${comment.content} &nbsp&nbsp <i class="fa fa-trash clickable"></i> </p>
         <hr />
       `
       })
@@ -167,6 +167,19 @@ export default class TaskController {
 
   deleteTask(taskId, listId) {
     store.deleteTask(taskId, listId, drawMainContent)
+    //finish this out - draw details, delete comments
+  }
+
+  updateTask(e) {
+    //complete this
+  }
+
+  hideTaskDetails() {
+    //complete this
+  }
+
+  moveTask(e) {
+    //move task between lists
   }
 
   getComments(taskId) {
@@ -190,5 +203,9 @@ export default class TaskController {
     store.createComment(newComment, activeTask._id, drawDetailPane)
     e.target.reset
     commentFormVisible = false
+  }
+
+  deleteComment(commentId) {
+    //complete this
   }
 }
