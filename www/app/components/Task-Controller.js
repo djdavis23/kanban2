@@ -48,7 +48,7 @@ function drawDetailPane() {
         <span>Task Details</span>
         <span>
           <i class="fa fa-window-minimize clickable" onclick="app.controllers.task.hideTaskDetails()"></i>
-          &nbsp<i class="fa fa-trash clickable"></i>
+          &nbsp<i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${activeTask._id}', '${activeTask.listId}')"></i>
         </span>
       </h4>
       <h4>${activeTask.title}</h4>
