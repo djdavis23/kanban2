@@ -195,11 +195,11 @@ export default class Store {
       .catch(err => console.error(err))
   }
 
-  deleteTask(taskId, listId, draw) {
+  deleteTask(taskId, listId, drawMain, drawDetails) {
     api.delete(`/tasks/${taskId}`)
       .then(() => {
-        //delete comments
-        this.getTasksByList(listId, draw)
+        this.deleteCommentsByTask(taskId, drawDetails)
+        this.getTasksByList(listId, drawMain)
       })
       .catch(err => console.error(err))
   }
@@ -233,5 +233,13 @@ export default class Store {
         this.getCommentsByTask(taskId, draw)
       })
       .catch(err => console.error(err))
+  }
+  deleteCommentsByTask(taskId, draw) {
+    console.log("deleting comments for task ", taskId)
+    api.delete(`/comments/by-task/${taskId}`)
+      .then(() => {
+        delete state.activeComments[taskId]
+        draw()
+      })
   }
 }

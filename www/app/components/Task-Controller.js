@@ -172,7 +172,11 @@ export default class TaskController {
   }
 
   deleteTask(taskId, listId) {
-    store.deleteTask(taskId, listId, drawMainContent)
+    store.deleteTask(taskId, listId, drawMainContent, drawDetailPane)
+    if (taskId == activeTask._id) {
+      activeTask = null
+      showTaskDetails = false
+    }
     //finish this out - draw details, delete comments
   }
 
