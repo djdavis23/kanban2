@@ -47,7 +47,8 @@ function drawDetailPane() {
       <h4 class="flexbox text-primary">
         <span>Task Details</span>
         <span>
-          <i class="fa fa-window-minimize clickable"></i>&nbsp<i class="fa fa-trash clickable"></i>
+          <i class="fa fa-window-minimize clickable" onclick="app.controllers.task.hideTaskDetails()"></i>
+          &nbsp<i class="fa fa-trash clickable"></i>
         </span>
       </h4>
       <h4>${activeTask.title}</h4>
@@ -72,7 +73,8 @@ function drawDetailPane() {
     if (store.state.activeComments[activeTask._id]) {
       store.state.activeComments[activeTask._id].forEach(comment => {
         template += `
-        <p>${comment.userName} &nbsp ${comment.content} &nbsp&nbsp <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteComment('${comment._id}')"></i> </p>
+        <p>${comment.userName} &nbsp ${comment.content} &nbsp&nbsp <i class="fa fa-trash clickable" 
+          onclick="app.controllers.task.deleteComment('${comment._id}')"></i> </p>
         <hr />
       `
       })
@@ -164,6 +166,10 @@ export default class TaskController {
     drawDetailPane()
   }
 
+  hideTaskDetails() {
+    showTaskDetails = false
+    drawDetailPane()
+  }
 
   deleteTask(taskId, listId) {
     store.deleteTask(taskId, listId, drawMainContent)
@@ -171,10 +177,6 @@ export default class TaskController {
   }
 
   updateTask(e) {
-    //complete this
-  }
-
-  hideTaskDetails() {
     //complete this
   }
 
