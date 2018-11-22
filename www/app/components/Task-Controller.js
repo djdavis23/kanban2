@@ -72,7 +72,7 @@ function drawDetailPane() {
     if (store.state.activeComments[activeTask._id]) {
       store.state.activeComments[activeTask._id].forEach(comment => {
         template += `
-        <p>${comment.userName} &nbsp ${comment.content} &nbsp&nbsp <i class="fa fa-trash clickable"></i> </p>
+        <p>${comment.userName} &nbsp ${comment.content} &nbsp&nbsp <i class="fa fa-trash clickable" onclick="app.controllers.task.deleteComment('${comment._id}')"></i> </p>
         <hr />
       `
       })
@@ -206,6 +206,6 @@ export default class TaskController {
   }
 
   deleteComment(commentId) {
-    //complete this
+    store.deleteComment(commentId, activeTask._id, drawDetailPane)
   }
 }

@@ -226,4 +226,12 @@ export default class Store {
       })
       .catch(err => console.error(err))
   }
+
+  deleteComment(commentId, taskId, draw) {
+    api.delete(`/comments/${commentId}`)
+      .then(() => {
+        this.getCommentsByTask(taskId, draw)
+      })
+      .catch(err => console.error(err))
+  }
 }
