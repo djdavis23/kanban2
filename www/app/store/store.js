@@ -208,7 +208,14 @@ export default class Store {
   }
 
   deleteTasksByList(listId, drawDetailPane) {
-    api.delete(`/tasks/by-list/${listId}`)
+    api.get(`/tasks/by-list/${listId}`)
+      .then(res => {
+        res.data.forEach(task => this.deleteCommentsByTask(task._id, drawDetailPane))
+        api.delete(`/tasks/by-list/${listId}`)
+        delete state.activeTasks[listId]
+      })
+      .catch(err => console.error(err))
+
   }
 
   getTask(taskId, listId) {
