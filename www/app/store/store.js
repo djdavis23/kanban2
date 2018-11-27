@@ -169,10 +169,13 @@ export default class Store {
       .catch(err => console.error(err))
   }
 
-  deleteList(listId, drawLists) {
+  deleteList(listId, drawLists, drawDetailPane) {
     let boardId = state.activeBoard._id
     api.delete(`/lists/${listId}`)
-      .then(() => this.getListsByBoard(boardId, drawLists))
+      .then(() => {
+        this.deleteTasksByList(listId, drawDetailPane)
+        this.getListsByBoard(boardId, drawLists)
+      })
       .catch(err => console.error(err))
   }
 
@@ -202,6 +205,10 @@ export default class Store {
         this.getTasksByList(listId, drawMain)
       })
       .catch(err => console.error(err))
+  }
+
+  deleteTasksByList(listId, drawDetailPane) {
+    api.delete(`/tasks/by-list/${listId}`)
   }
 
   getTask(taskId, listId) {

@@ -3,6 +3,7 @@ import Store from "../store/store.js";
 let store = new Store()
 
 const boardDetails = document.getElementById("main-content")
+const taskDetails = document.getElementById("detail-pane")
 
 //this function draws each list associated with the active board.  It shows
 //list title and description followed by a summary view  of each task
@@ -51,6 +52,10 @@ function drawLists() {
   boardDetails.innerHTML = template
 }
 
+function drawDetailPane() {
+  taskDetails.innerHTML = ''
+}
+
 export default class ListController {
 
   //retrieve all lists associated with the specified board
@@ -73,7 +78,7 @@ export default class ListController {
 
   //delete the specified list (and associated tasks -- see store)
   deleteList(listId) {
-    store.deleteList(listId, drawLists)
+    store.deleteList(listId, drawLists, drawDetailPane)
   }
 
 }
