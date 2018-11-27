@@ -177,7 +177,6 @@ export default class TaskController {
       activeTask = null
       showTaskDetails = false
     }
-    //finish this out - draw details, delete comments
   }
 
   updateTask(e) {
