@@ -51,8 +51,11 @@ function drawDetailPane() {
           &nbsp<i class="fa fa-trash clickable" onclick="app.controllers.task.deleteTask('${activeTask._id}', '${activeTask.listId}')"></i>
         </span>
       </h4>
+      <hr />
       <h4>${activeTask.title}</h4>
       <p>${activeTask.description}</p>
+      <hr />
+      <h5>List: ${activeTask.listId}</h5>
       <h5>Initiator: ${activeTask.userId}</h5>
       <h5>Created: ${new Date(activeTask.created).toDateString()}</h5>
       <h5>Status: ${activeTask.status}</h5>
