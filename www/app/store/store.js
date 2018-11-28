@@ -164,6 +164,7 @@ export default class Store {
   }
 
   deleteListsByBoard(boardId) {
+    console.log("Deleting List for board: ", boardId)
     api.get(`/lists/by-board/${boardId}`)
       .then(res => {
         res.data.forEach(list => {
@@ -216,6 +217,7 @@ export default class Store {
   }
 
   deleteTasksByList(listId, drawDetailPane) {
+    console.log("deleting tasks for list id: ", listId)
     api.get(`/tasks/by-list/${listId}`)
       .then(res => {
         res.data.forEach(task => this.deleteCommentsByTask(task._id, drawDetailPane))

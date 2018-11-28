@@ -65,13 +65,16 @@ function drawActiveBoard() {
   boardHeader.innerHTML = template
 }
 
-
+function drawDetailPane() {
+  document.getElementById('details-pane').innerHTML = "";
+}
 
 
 export default class BoardController {
 
   getBoards() {
     store.getBoards(drawBoards, drawBoardsHeader);
+    drawDetailPane()
   }
 
   createBoard(e) {
