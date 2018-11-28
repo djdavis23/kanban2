@@ -164,9 +164,15 @@ export default class Store {
   }
 
   deleteListsByBoard(boardId) {
-    api.delete(`/lists/by-board/${boardId}`)
-      .then(() => setState('activeLists', []))
-      .catch(err => console.error(err))
+    api.get(`/lists/by-board/${boardId}`)
+      .then(res => {
+        res.data.forEach(list => {
+          this.deleteTasksByList(list._id)
+        })
+        api.delete(`/lists/by-board/${boardId}`)
+          .then(() => setState('activeLists', []))
+          .catch(err => console.error(err))
+      })
   }
 
   deleteList(listId, drawLists, drawDetailPane) {
@@ -178,6 +184,8 @@ export default class Store {
       })
       .catch(err => console.error(err))
   }
+
+
 
 
 
