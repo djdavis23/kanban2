@@ -66,7 +66,7 @@ function drawActiveBoard() {
 }
 
 function drawDetailPane() {
-  document.getElementById('details-pane').innerHTML = "";
+  document.getElementById('detail-pane').innerHTML = "";
 }
 
 
